@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>SampleGroup</groupId>
+    <artifactId>SampleArtifact</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xebialabs.restito</groupId>
+            <artifactId>restito</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_core</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_http</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>chronos-jmeter-maven-plugin</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <performancetest.webservice.host>localhost</performancetest.webservice.host>
+                <performancetest.webservice.port>8888</performancetest.webservice.port>
+                <jmeter_test_filename>TestPlan</jmeter_test_filename>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.lazerycode.jmeter</groupId>
+                    <artifactId>jmeter-maven-plugin</artifactId>
+                    <version>2.0.3</version>
+                    <configuration>
+                        <!--
+                           By default the test results are saved in a file
+                           /target/jmeter/results/<testname>-<timestamp>.jtl
+                           Further processing is easier without timestamp though.
+                        -->
+                        <testResultsTimestamp>false</testResultsTimestamp>
+
+                        <!--
+                           To simplify debugging, it is advisable to adapt the loglevel.
+                           The jmeter logs are written to the file jmeter.log.
+                        -->
+                        <overrideRootLogLevel>DEBUG</overrideRootLogLevel>
+
+                        <!--
+                           By default, the console output during a jmeter test run is suppressed.
+                           We want to display the progress using the listener "Generate Summary Results"
+                           (which periodically prints stats to stdout). Therefore we have to make sure,
+                           that the jmeter output is not suppressed.
+                        -->
+                        <suppressJMeterOutput>false</suppressJMeterOutput>
+
+                        <!--
+                           If tests fail (e.g. a http-request running into a timeout), the corresponding maven
+                           goal also fails (and subsequent goals aren't executed anymore). We want to create graphs
+                           from test-results, no matter if some requests failed or not, so we ignore jmeter failures.
+                        -->
+                        <ignoreResultFailures>true</ignoreResultFailures>
+                        <remoteConfig>
+                            <startServersBeforeTests>true</startServersBeforeTests>
+                            <stopServersAfterTests>true</stopServersAfterTests>
+                        </remoteConfig>
+                        <postTestPauseInSeconds>1</postTestPauseInSeconds>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>kg.apc</groupId>
+                            <artifactId>jmeter-plugins</artifactId>
+                            <version>1.3.1</version>
+                            <exclusions>
+                                <!--
+                                   Unfortunately some transitive dependencies cannot be found on mvncentral
+                                   and we have to explicitly exclude them.
+                                   For a complete list, see https://github.com/mlex/jmeter-maven-example/
+                               -->
+                                <exclusion>
+                                    <groupId>kg.apc</groupId>
+                                    <artifactId>perfmon</artifactId>
+                                </exclusion>
+                                <!-- ... -->
+
+                                <!--
+                                    Because of a bug in the jmeter-maven-plugin (see
+                                    https://github.com/Ronnie76er/jmeter-maven-plugin/issues/77) we have to
+                                    exclude jmeter dependencies here, too.
+                                -->
+                                <exclusion>
+                                    <groupId>org.apache.jmeter</groupId>
+                                    <artifactId>jorphan</artifactId>
+                                </exclusion>
+                                <!-- ... -->
+                            </exclusions>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>com.lazerycode.jmeter</groupId>
+                    <artifactId>jmeter-maven-plugin</artifactId>
+                    <version>2.0.3</version>
+                    <configuration>
+                        <suppressJMeterOutput>false</suppressJMeterOutput>
+                        <jmeterExtensions>
+                            <artifact>kg.apc:jmeter-plugins</artifact>
+                            <artifact>kg.apc:jmeter-plugins-standard</artifact>
+                            <artifact>kg.apc:jmeter-plugins-extras</artifact>
+                            <artifact>kg.apc:jmeter-plugins-extras-libs</artifact>
+                            <artifact>org.apache.jmeter:jorphan</artifact>
+                        </jmeterExtensions>
+                        <testFilesDirectory>src/main/resources</testFilesDirectory>
+                        <logsDirectory>${project.build.directory}src/main/resources/logs</logsDirectory>
+                        <propertiesSystem>
+                            <webservice.host>${performancetest.webservice.host}</webservice.host>
+                            <webservice.port>${performancetest.webservice.port}</webservice.port>
+                        </propertiesSystem>
+                        <propertiesUser>
+                            <loops>1</loops>
+                            <threads>25</threads>
+                            <ramp>5</ramp>
+                        </propertiesUser>
+                        <testFilesIncluded>
+                            <jmeterTestFile>${jmeter_test_filename}.jmx</jmeterTestFile>
+                        </testFilesIncluded>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.5.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

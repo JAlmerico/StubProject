@@ -1,0 +1,44 @@
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Initializing locale 
+2016/11/16 16:24:04 INFO  - jmeter.util.JMeterUtils: Setting Locale to en_US 
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Loading SaveService properties 
+2016/11/16 16:24:04 INFO  - jmeter.save.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2 
+2016/11/16 16:24:04 INFO  - jmeter.save.SaveService: Using SaveService properties file encoding UTF-8 
+2016/11/16 16:24:04 INFO  - jmeter.save.SaveService: Using SaveService properties version 2.9 
+2016/11/16 16:24:04 INFO  - jmeter.save.SaveService: All converter versions present and correct 
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Locating Test Plan 
+2016/11/16 16:24:04 INFO  - jmeter.save.SaveService: Loading file: /Users/Jonathan/IdeaProjects/SampleProject/src/main/resources/TestPlan.jmx 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.control.CacheManager: Will only cache the following methods: [GET] 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.control.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_ 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser 
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Configuring Test Plan 
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Running Test Plan 
+2016/11/16 16:24:04 INFO  - jmeter.engine.StandardJMeterEngine: Running the test! 
+2016/11/16 16:24:04 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2016/11/16 16:24:04 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2016/11/16 16:24:04 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
+2016/11/16 16:24:04 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
+2016/11/16 16:24:04 WARN  - jmeter.engine.util.CompoundVariable: Did not find any functions 
+2016/11/16 16:24:04 INFO  - jmeter.services.FileServer: Default base='/Users/Jonathan/IdeaProjects/SampleProject' 
+2016/11/16 16:24:04 INFO  - jmeter.engine.StandardJMeterEngine: Starting ThreadGroup: 1 : Thread Group 
+2016/11/16 16:24:04 INFO  - jmeter.engine.StandardJMeterEngine: Starting 1 threads for group Thread Group. 
+2016/11/16 16:24:04 INFO  - jmeter.engine.StandardJMeterEngine: Thread will continue on error 
+2016/11/16 16:24:04 INFO  - jmeter.threads.ThreadGroup: Starting thread group number 1 threads 1 ramp-up 1 perThread 1000.0 delayedStart=false 
+2016/11/16 16:24:04 INFO  - jmeter.threads.ThreadGroup: Started thread group number 1 
+2016/11/16 16:24:04 INFO  - jmeter.engine.StandardJMeterEngine: All thread groups have been started 
+2016/11/16 16:24:04 INFO  - jmeter.threads.JMeterThread: Thread started: Thread Group 1-1 
+2016/11/16 16:24:04 INFO  - jmeter.protocol.http.sampler.HTTPJavaImpl: Maximum connection retries = 0 
+2016/11/16 16:24:04 INFO  - jmeter.samplers.SampleResult: Note: Sample TimeStamps are START times 
+2016/11/16 16:24:04 INFO  - jmeter.samplers.SampleResult: sampleresult.default.encoding is set to ISO-8859-1 
+2016/11/16 16:24:04 INFO  - jmeter.samplers.SampleResult: sampleresult.useNanoTime=true 
+2016/11/16 16:24:04 INFO  - jmeter.samplers.SampleResult: sampleresult.nanoThreadSleep=5000 
+2016/11/16 16:24:04 INFO  - jmeter.threads.JMeterThread: Thread is done: Thread Group 1-1 
+2016/11/16 16:24:04 INFO  - jmeter.threads.JMeterThread: Thread finished: Thread Group 1-1 
+2016/11/16 16:24:04 INFO  - jmeter.engine.StandardJMeterEngine: Notifying test listeners of end of test 
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Testing login verification 
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Testing /preview page 
+2016/11/16 16:24:04 INFO  - com.betabreakers.Main: Testing /demo page 
